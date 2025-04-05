@@ -1,0 +1,8 @@
+# Enable Group Policy to turn off Microsoft Store
+$GPOPath = "HKLM:\Software\Policies\Microsoft\WindowsStore"
+if (-not (Test-Path $GPOPath)) {
+    New-Item -Path $GPOPath -Force
+}
+New-ItemProperty -Path $GPOPath -Name "RemoveWindowsStore" -Value 1 -PropertyType DWord -Force
+
+Write-Output "Microsoft Store has been disabled via Group Policy."
